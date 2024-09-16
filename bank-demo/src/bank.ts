@@ -1,4 +1,4 @@
-// Indictes the type for all bank accounts in the bank
+// Indicates the type for all bank accounts in the bank
 interface BankAccount {
   name: string;
   age: number;
@@ -25,7 +25,7 @@ export default class Bank {
   }
 
   /**
-   * creates a new account with a unique account number
+   * Creates a new account with a unique account number
    * @param name -- name of the customer
    * @param age -- age of the customer
    * @param accountNumber -- account number of the customer
@@ -47,6 +47,31 @@ export default class Bank {
       balance: 0,
     };
     this.accounts.push(account);
+    return account;
+  }
+
+  /**
+   * Withdraws money from a bank account
+   * @param accountNumber -- the account number to withdraw money from
+   * @param amount -- the amount of money to withdraw
+   * @returns the updated bank account with the new balance
+   */
+  public withdraw(accountNumber: string, amount: number): BankAccount {
+    const account = this.findAccount(accountNumber);
+
+    if (!account) {
+      throw new Error("Account not found");
+    }
+
+    if (amount <= 0) {
+      throw new Error("Withdrawal amount must be greater than zero");
+    }
+
+    if (account.balance < amount) {
+      throw new Error("Insufficient balance");
+    }
+
+    account.balance -= amount;
     return account;
   }
 }
