@@ -84,3 +84,27 @@ try {
     console.log("Scenario 7 failed");
   }
 }
+
+// Scenario 8 - Check balance of an existing account
+try {
+  const balance = bank.checkBalance("2938298");
+  if (balance === 50) {
+    console.log("Scenario 8 passed");
+  } else {
+    console.log("Scenario 8 failed");
+  }
+} catch (_) {
+  console.log("Scenario 8 failed");
+}
+
+// Scenario 9 - Check balance of a non-existent account
+try {
+  bank.checkBalance("non-existent-account");
+  console.log("Scenario 9 failed");
+} catch (e) {
+  if (e instanceof Error && e.message === "Account not found") {
+    console.log("Scenario 9 passed");
+  } else {
+    console.log("Scenario 9 failed");
+  }
+}
